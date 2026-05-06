@@ -23,7 +23,7 @@ Before you begin, ensure you have the following installed on your machine:
 The project is structured as a full-stack monolith containing both the React frontend and Express backend:
 
 ```text
-claude_clone/
+clunde_code/
 ├── backend/                  # Express.js API Server
 │   ├── controllers/          # Route logic (chats, messages)
 │   ├── models/               # MongoDB Schemas (Chat, Message, Memory)
@@ -31,14 +31,15 @@ claude_clone/
 │   ├── server.js             # Main backend entry point
 │   ├── .env                  # Environment variables
 │   └── package.json          # Backend dependencies
-└── frontend/                 # React.js Vite Application
-    ├── public/               # Static assets (Clunde SVG icons)
-    ├── src/                  # React source code
-    │   ├── App.jsx           # Main UI Interface
-    │   ├── api.js            # Axios client for backend communication
-    │   └── index.css         # Tailwind directives & global styling
-    ├── tailwind.config.js    # Tailwind theme configuration
-    └── package.json          # Frontend dependencies
+├── frontend/                 # React.js Vite Application
+│    ├── public/              # Static assets (Clunde SVG icons)
+│    ├── src/                 # React source code
+│    │   ├── App.jsx          # Main UI Interface
+│    │   ├── api.js           # Axios client for backend communication
+│    │   └── index.css        # Tailwind directives & global styling
+│    ├── tailwind.config.js   # Tailwind theme configuration
+│    └── package.json         # Frontend dependencies
+└── screenshots/              # Screenshots of the application
 ```
 
 ## Environment Variables (.env) 🔐
