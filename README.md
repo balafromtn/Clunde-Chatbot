@@ -58,7 +58,7 @@ Follow these steps to get the project running locally:
 
 **1. Clone the repository and navigate into the project:**
 ```bash
-cd claude_clone
+cd clunde_code
 ```
 
 **2. Install Backend Dependencies & Start Server:**
