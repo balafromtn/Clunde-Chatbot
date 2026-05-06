@@ -1,0 +1,324 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════
+   CARTOON DESIGN TOKENS
+   ════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* 🌞 Light — Warm Paper */
+    --background: 30 25% 93%;        /* warm cream-brown */
+    --foreground: 20 10% 15%;        /* dark warm ink */
+    --card: 35 30% 96%;              /* slightly lighter cream */
+    --card-foreground: 20 10% 15%;
+    --popover: 30 25% 97%;
+    --popover-foreground: 20 10% 15%;
+    --primary: 20 10% 15%;
+    --primary-foreground: 30 25% 93%;
+    --secondary: 30 20% 87%;         /* light brownish */
+    --secondary-foreground: 20 10% 15%;
+    --muted: 28 18% 84%;
+    --muted-foreground: 20 6% 42%;
+    --accent: 24 95% 48%;            /* warm orange */
+    --accent-foreground: 0 0% 100%;
+    --accent-soft: 24 90% 72%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 25 15% 30%;            /* warm dark brown */
+    --input: 25 15% 30%;
+    --ring: 24 95% 48%;
+    --radius: 0.5rem;
+
+    --sidebar-bg: 28 100% 87%;       /* #FFDBBB light orange */
+    --chat-bg: 30 40% 93%;           /* warm cream (bottom color) */
+    --chat-bg-gradient: linear-gradient(145deg, hsl(35, 30%, 99%) 0%, hsl(30, 40%, 93%) 100%);
+    --bubble-user: 24 85% 85%;       /* soft peach */
+    --bubble-assistant: 30 20% 98%;  /* near-white warm */
+    --code-bg: 25 12% 18%;           /* dark brown for code — text will be light */
+    --code-fg: 35 20% 90%;           /* light text on dark code bg */
+  }
+
+  .dark {
+    /* 🌙 Dark — Comic Ink */
+    --background: 40 15% 4%;
+    --foreground: 0 0% 96%;
+    --card: 40 10% 11%;
+    --card-foreground: 0 0% 96%;
+    --popover: 40 10% 11%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 40 15% 4%;
+    --secondary: 43 8% 9%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 40 6% 14%;
+    --muted-foreground: 0 0% 69%;
+    --accent: 28 100% 62%;
+    --accent-foreground: 0 0% 0%;
+    --accent-soft: 28 80% 40%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 23%;
+    --input: 0 0% 23%;
+    --ring: 28 100% 62%;
+
+    --sidebar-bg: 43 8% 9%;
+    --chat-bg: 40 10% 11%;
+    --chat-bg-gradient: linear-gradient(180deg, hsl(40, 10%, 11%) 0%, hsl(40, 10%, 13%) 100%);
+    --bubble-user: 28 60% 24%;
+    --bubble-assistant: 37 6% 15%;
+    --code-bg: 0 0% 5%;
+    --code-fg: 0 0% 92%;
+  }
+}
+
+@layer base {
+  * { border-color: hsl(var(--border)); }
+  html { color-scheme: light; }
+  .dark { color-scheme: dark; }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Comic Neue", "Baloo 2", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ════════════════════════════════════════
+   INK STROKE BORDERS
+   ════════════════════════════════════════ */
+
+.ink-border {
+  position: relative;
+  border: 2.5px solid hsl(var(--border));
+  border-radius: 10px 7px 12px 8px;
+}
+
+
+
+.ink-border-thin {
+  position: relative;
+  border: 2px solid hsl(var(--border) / 0.5);
+  border-radius: 8px 10px 7px 9px;
+}
+
+
+/* ════════════════════════════════════════
+   PAPER GRAIN
+   ════════════════════════════════════════ */
+
+.paper-grain {
+  position: relative;
+}
+
+.paper-grain > .grain-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.dark .paper-grain > .grain-overlay {
+  opacity: 0.015;
+}
+
+/* ════════════════════════════════════════
+   COMIC SPEECH BUBBLES
+   ════════════════════════════════════════ */
+
+.comic-bubble-user {
+  background: hsl(var(--bubble-user));
+  border: 2.5px solid hsl(var(--border));
+  border-radius: 20px 20px 6px 20px;
+  position: relative;
+}
+
+
+
+.comic-bubble-user::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: hsl(var(--bubble-user));
+  border-right: 2.5px solid hsl(var(--border));
+  border-bottom: 2.5px solid hsl(var(--border));
+  border-radius: 0 0 16px 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.comic-bubble-ai {
+  background: hsl(var(--bubble-assistant));
+  border: 2.5px solid hsl(var(--border));
+  border-radius: 20px 20px 20px 6px;
+  position: relative;
+}
+
+
+
+.comic-bubble-ai::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background: hsl(var(--bubble-assistant));
+  border-left: 2.5px solid hsl(var(--border));
+  border-bottom: 2.5px solid hsl(var(--border));
+  border-radius: 0 0 0 16px;
+  clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+/* ════════════════════════════════════════
+   SCROLLBAR
+   ════════════════════════════════════════ */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border) / 0.3);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--border) / 0.55);
+}
+
+/* ════════════════════════════════════════
+   PROSE / MARKDOWN — DARK CODE BLOCKS
+   ════════════════════════════════════════ */
+
+.prose {
+  font-family: "Comic Neue", "Baloo 2", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: hsl(var(--foreground));
+}
+
+.prose code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 14px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: hsl(var(--code-bg));
+  color: hsl(var(--code-fg));
+}
+
+.prose pre {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 14px 16px;
+  margin: 12px 0;
+  border-radius: 8px;
+  background: hsl(var(--code-bg));
+  color: hsl(var(--code-fg));
+  border: 2.5px solid hsl(var(--border) / 0.4);
+  overflow-x: auto;
+  position: relative;
+  box-sizing: border-box;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+
+
+
+.prose pre code {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+  display: block;
+}
+
+.prose p { margin-bottom: 14px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose ul, .prose ol { padding-left: 22px; margin-bottom: 14px; }
+.prose li { margin-bottom: 5px; }
+.prose h1, .prose h2, .prose h3 { font-weight: 700; margin-top: 22px; margin-bottom: 10px; }
+.prose h1 { font-size: 21px; }
+.prose h2 { font-size: 20px; }
+.prose h3 { font-size: 18px; }
+.prose a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 2px; }
+
+.prose blockquote {
+  border-left: 3px solid hsl(var(--accent) / 0.5);
+  padding-left: 16px;
+  color: hsl(var(--muted-foreground));
+  margin: 14px 0;
+  font-style: italic;
+}
+
+.prose table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 16px; }
+.prose th, .prose td { border: 2px solid hsl(var(--border) / 0.25); padding: 8px 12px; text-align: left; }
+.prose th { background: hsl(var(--muted)); font-weight: 700; }
+
+/* ════════════════════════════════════════
+   INTERACTIONS
+   ════════════════════════════════════════ */
+
+.comic-btn {
+  transition: all 180ms ease;
+  cursor: pointer;
+}
+.comic-btn:hover { transform: scale(1.02); }
+.comic-btn:active { transform: scale(0.97); }
+
+@keyframes comic-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(0.5deg); }
+  75% { transform: rotate(-0.5deg); }
+}
+.comic-wobble:hover { animation: comic-wobble 350ms ease-in-out; }
+
+.comic-send {
+  transition: all 200ms ease;
+  position: relative;
+}
+.comic-send::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: hsl(var(--accent) / 0.15);
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
+  transform: scale(0.7);
+}
+.comic-send:hover::before { opacity: 1; transform: scale(1); }
+.comic-send:hover { transform: scale(1.08) rotate(3deg); }
+.comic-send:active { transform: scale(0.95) rotate(-1deg); }
+
+/* ════════════════════════════════════════
+   TYPING DOTS
+   ════════════════════════════════════════ */
+
+@keyframes comic-dot {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0) scale(1); }
+  40% { opacity: 1; transform: translateY(-5px) scale(1.2); }
+}
+.comic-typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(var(--muted-foreground));
+  animation: comic-dot 1.3s ease-in-out infinite;
+}
+.comic-typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.comic-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+/* ════════════════════════════════════════
+   THEME TRANSITION
+   ════════════════════════════════════════ */
+html { transition: background-color 400ms ease, color 400ms ease; }
